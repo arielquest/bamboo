@@ -1,0 +1,11 @@
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Test001] (
+		[UserName]     [varchar](25) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+		[Password]     [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+)
+GO
+ALTER TABLE [dbo].[Test001] SET (LOCK_ESCALATION = TABLE)
+GO
