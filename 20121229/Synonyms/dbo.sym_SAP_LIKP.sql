@@ -1,2 +1,0 @@
-CREATE SYNONYM [dbo].[sym_SAP_LIKP] FOR [SAPPROD].[PRD].[prd].[LIKP]
-GO

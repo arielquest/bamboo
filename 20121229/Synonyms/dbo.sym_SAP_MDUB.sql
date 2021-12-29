@@ -1,2 +1,0 @@
-CREATE SYNONYM [dbo].[sym_SAP_MDUB] FOR [SAPPROD].[PRD].[prd].[MDUB]
-GO

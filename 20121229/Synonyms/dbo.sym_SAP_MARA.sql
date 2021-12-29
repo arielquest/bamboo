@@ -1,2 +1,0 @@
-CREATE SYNONYM [dbo].[sym_SAP_MARA] FOR [SAPPROD].[PRD].[prd].[MARA]
-GO
