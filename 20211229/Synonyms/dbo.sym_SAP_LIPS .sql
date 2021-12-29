@@ -1,2 +1,0 @@
-CREATE SYNONYM [dbo].[sym_SAP_LIPS ] FOR [SAPPROD].[PRD].[prd].[LIPS]
-GO

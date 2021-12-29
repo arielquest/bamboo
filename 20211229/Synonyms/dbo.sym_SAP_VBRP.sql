@@ -1,2 +1,0 @@
-CREATE SYNONYM [dbo].[sym_SAP_VBRP] FOR [SAPPROD].[PRD].[prd].[VBRP]
-GO
