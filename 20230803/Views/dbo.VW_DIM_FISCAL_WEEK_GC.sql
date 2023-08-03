@@ -1,0 +1,23 @@
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[VW_DIM_FISCAL_WEEK_GC]
+WITH SCHEMABINDING
+AS
+SELECT  datagc.[INT_KEY] AS RESOURCE_ID,
+        dimFiscalWeek.[FISCAL_YEAR_URN],
+        dimFiscalWeek.[NAME],
+        dimFiscalWeek.[START_DATE_TIME],
+        dimFiscalWeek.[END_DATE_TIME],
+        datagc.[GENERATION_COUNT],
+        datagc.[CREATE_GENERATION_COUNT],
+        datagc.[LAST_OPERATION]
+FROM    [dbo].[TS_ADM_DATA_GENERATION_COUNT] datagc
+JOIN    [dbo].[TS_ADM_TABLE_GENERATION_COUNT] tablegc ON tablegc.TABLE_GENERATION_COUNT_URN = datagc.TABLE_GENERATION_COUNT_URN
+LEFT JOIN [dbo].[TB_DIM_FISCAL_WEEK] dimFiscalWeek ON dimFiscalWeek.FISCAL_WEEK_URN = datagc.INT_KEY
+WHERE   tablegc.TABLE_NAME = 'TB_DIM_FISCAL_WEEK';
+GO
+GRANT SELECT
+	ON [dbo].[VW_DIM_FISCAL_WEEK_GC]
+	TO [portalapp_role]
+GO

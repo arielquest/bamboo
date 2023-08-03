@@ -1,0 +1,19 @@
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[VW_DIM_CUSTOMER]
+WITH SCHEMABINDING
+AS
+SELECT  it.[ITEM_URN],
+        it.[TENANT_BIZ_URN],
+        tn.[NAME] AS [TENANT_NAME],
+        it.[CLASSIFICATION_CODE_BIZ_URN],
+        it.[CUSTOMER_TYPE], -- ('G','C','I'))
+        it.[NAME]
+FROM    [dbo].[TB_DIM_CUSTOMER] it
+JOIN    [dbo].[TB_DIM_TENANT] tn ON tn.[ITEM_URN] = it.[TENANT_BIZ_URN];
+GO
+GRANT SELECT
+	ON [dbo].[VW_DIM_CUSTOMER]
+	TO [portalapp_role]
+GO

@@ -1,0 +1,14 @@
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[VW_DIM_CASE_CUBE]
+WITH SCHEMABINDING
+AS
+    SELECT  [it].[ITEM_URN],
+            [it].[NAME]
+    FROM    [dbo].[TB_DIM_CASE] AS [it];
+GO
+GRANT SELECT
+	ON [dbo].[VW_DIM_CASE_CUBE]
+	TO [portalapp_role]
+GO

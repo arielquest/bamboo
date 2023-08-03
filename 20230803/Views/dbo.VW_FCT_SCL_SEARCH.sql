@@ -1,0 +1,13 @@
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[VW_FCT_SCL_SEARCH]
+AS
+    SELECT  *,
+            1 AS [Row Count]
+    FROM    [dbo].[VW_PARTITIONED_FCT_SCL_SEARCH];
+GO
+GRANT SELECT
+	ON [dbo].[VW_FCT_SCL_SEARCH]
+	TO [portalreporting_role]
+GO

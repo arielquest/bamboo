@@ -1,0 +1,24 @@
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[VW_REP_STRING_GC]
+WITH SCHEMABINDING
+AS
+SELECT  datagc.[GUID_KEY] AS RESOURCE_ID,
+        string.[REPORT_MODEL_ID],
+        string.[CULTURE],
+        string.[LOOKUP_VALUE],
+        string.[DISPLAY_STRING],
+        string.[SYSTEM],
+        datagc.[GENERATION_COUNT],
+        datagc.[CREATE_GENERATION_COUNT],
+        datagc.[LAST_OPERATION]
+FROM    [dbo].[TS_ADM_DATA_GENERATION_COUNT] datagc
+JOIN    [dbo].[TS_ADM_TABLE_GENERATION_COUNT] tablegc ON tablegc.TABLE_GENERATION_COUNT_URN = datagc.TABLE_GENERATION_COUNT_URN
+LEFT JOIN [dbo].[TB_REP_STRING] string ON string.STRING_ID = datagc.GUID_KEY
+WHERE   tablegc.TABLE_NAME = 'TB_REP_STRING';
+GO
+GRANT SELECT
+	ON [dbo].[VW_REP_STRING_GC]
+	TO [portalapp_role]
+GO

@@ -1,0 +1,11 @@
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE  FUNCTION dbo.fn_path_name ( @path NVARCHAR(450) )
+RETURNS NVARCHAR(50)
+AS
+    BEGIN 
+        RETURN CASE WHEN CHARINDEX('/', REVERSE(@path)) = 0 THEN @path
+                ELSE RIGHT(@path, CHARINDEX('/', REVERSE(@path)) - 1) END;
+    END;
+GO

@@ -1,0 +1,29 @@
+SET ANSI_NULLS ON
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[VW_ADM_GADGET_GC]
+WITH SCHEMABINDING
+AS
+SELECT  datagc.[GUID_KEY] AS RESOURCE_ID,
+        g.[RESOURCE_GROUP_ID],
+        g.[NAME],
+        g.[DISPLAY_NAME],
+        g.[DESCRIPTION],
+        g.[PRIORITY],
+        g.[CHANGE_STAMP],
+        g.[CREATION_DATE],
+        g.[MODIFIED_DATE],
+        g.[CREATED_BY_ID],
+        g.[MODIFIED_BY_ID],
+        datagc.[GENERATION_COUNT],
+        datagc.[CREATE_GENERATION_COUNT],
+        datagc.[LAST_OPERATION]
+FROM    [dbo].[TS_ADM_DATA_GENERATION_COUNT] datagc
+JOIN    [dbo].[TS_ADM_TABLE_GENERATION_COUNT] tablegc ON tablegc.TABLE_GENERATION_COUNT_URN = datagc.TABLE_GENERATION_COUNT_URN
+LEFT JOIN [dbo].[TB_ADM_GADGET] g ON g.ID = datagc.GUID_KEY
+WHERE   tablegc.TABLE_NAME = 'TB_ADM_GADGET';
+GO
+GRANT SELECT
+	ON [dbo].[VW_ADM_GADGET_GC]
+	TO [portalapp_role]
+GO
